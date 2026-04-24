@@ -48,14 +48,6 @@ export default function HeroSection() {
 
       {/* Top header bar */}
       <header className="relative z-10 flex items-center justify-between px-10 pt-8 pb-4">
-        <Logo size="md" />
-        <div
-          className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium"
-          style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.13)', color: 'rgba(255,255,255,0.7)' }}
-        >
-          <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-          Soluções em Vidro
-        </div>
       </header>
 
       {/* Hero headline */}
