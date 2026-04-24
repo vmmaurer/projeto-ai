@@ -2,6 +2,23 @@ import React from 'react'
 import Logo from './Logo'
 
 function QRCode() {
+  return (
+    <div
+      className="relative inline-block rounded-2xl p-3"
+      style={{
+        background: 'white',
+        boxShadow: '0 20px 60px rgba(0,0,0,0.4)',
+      }}
+    >
+      <img
+        src="/images/qrcode_whatsapp_linde_mensagem.png"
+        alt="QR Code WhatsApp Linde Vidros"
+        className="w-40 h-40 object-contain"
+      />
+    </div>
+  )
+}
+/* function QRCode() {
   // Decorative QR placeholder
   const cells = []
   const size = 11
@@ -61,7 +78,7 @@ function QRCode() {
       </div>
     </div>
   )
-}
+} */
 
 export default function CTASection() {
   return (
