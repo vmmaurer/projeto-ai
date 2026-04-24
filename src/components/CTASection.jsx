@@ -5,7 +5,7 @@ function QRCode() {
   // Decorative QR placeholder
   const cells = []
   const size = 11
-  // Seeded pattern for deterministic QR look penis
+  // Seeded pattern for deterministic QR look
   const pattern = [
     [1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1],
     [1,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,1],
