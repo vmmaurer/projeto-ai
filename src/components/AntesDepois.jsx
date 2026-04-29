@@ -105,7 +105,7 @@ export default function AntesDepois() {
     <section
       className="relative py-28 px-6 md:px-12 overflow-hidden"
       style={{
-        background: 'linear-gradient(180deg, #011c6b 0%, #010f40 100%)',
+        background: 'linear-gradient(180deg, #040b19 0%, #405b7a 50%, #040b19 100%)',
       }}
     >
       <div

@@ -30,7 +30,7 @@ export default function ProductModal({ product, onClose }) {
       <div
         className="relative w-full max-w-5xl max-h-[88vh] overflow-hidden rounded-3xl shadow-glass-lg flex flex-col"
         style={{
-          background: 'linear-gradient(155deg, rgba(1,28,107,0.98) 0%, rgba(1,15,64,0.99) 100%)',
+          background: 'linear-gradient(155deg, rgba(114, 119, 136, 0.98) 0%, rgba(121, 127, 150, 0.99) 100%)',
           border: '1px solid rgba(255,255,255,0.15)',
           animation: 'modalScale 0.4s cubic-bezier(0.22,1,0.36,1) forwards',
         }}

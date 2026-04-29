@@ -11,7 +11,7 @@ export default function HeroSection() {
     <section
       className="relative min-h-screen flex flex-col overflow-hidden"
       style={{
-        background: 'linear-gradient(160deg, #012488 0%, #011c6b 35%, #010f40 75%, #010827 100%)',
+        background: 'linear-gradient(180deg, #040b19 0%, #405b7a 50%, #040b19 100%)',
       }}
     >
       {/* Ambient background orbs */}
@@ -52,14 +52,14 @@ export default function HeroSection() {
 
       {/* Hero headline */}
       <div className="relative z-10 text-center px-8 pt-8 pb-4">
-        <p className="text-glass-300 text-sm font-semibold tracking-[0.35em] uppercase mb-3">
+        <p className="text-glass-100 text-sm font-Montserrat tracking-[0.35em] uppercase mb-3">
           Qualidade que transforma espaços
         </p>
-        <h1 className="font-display text-5xl md:text-6xl font-bold leading-tight mb-4">
+        <h1 className="font-display text-5xl md:text-6xl font-Montserrat leading-tight mb-4">
           <span className="text-white">Vidros de </span>
           <span
             style={{
-              background: 'linear-gradient(135deg, #ffffff 0%, #75c2ff 50%, #2ea4ff 100%)',
+              background: 'linear-gradient(135deg, #ffffff 0%, #ffffff 50%, #ffffff 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
@@ -68,7 +68,7 @@ export default function HeroSection() {
             Alto Padrão
           </span>
         </h1>
-        <p className="text-white/55 text-lg max-w-xl mx-auto leading-relaxed">
+        <p className="text-white/55 text-lg max-w-xl mx-auto leading-relaxed font-Montserrat">
           Explore nossas soluções e descubra como o vidro pode transformar arquitetura e design
         </p>
       </div>

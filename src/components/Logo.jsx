@@ -9,7 +9,7 @@ export default function Logo({ size = 'md', light = true }) {
   }
   const s = sizes[size]
   const textColor = light ? 'text-white' : 'text-navy-900'
-  const accentColor = light ? '#75c2ff' : '#0054a6'
+  const accentColor = light ? '#cf0f0f' : '#e01d1d'
 
   return (
     <div className={`flex items-center ${s.container} no-select`}>

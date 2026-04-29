@@ -85,20 +85,20 @@ export default function CTASection() {
     <section
       className="relative py-28 px-6 md:px-12 overflow-hidden"
       style={{
-        background: 'linear-gradient(155deg, #012488 0%, #011c6b 40%, #010827 100%)',
+        background: 'linear-gradient(180deg,  #040b19 0%, #405b7a 50%, #040b19 100%)'
       }}
     >
       {/* Ambient lights */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse 70% 50% at 20% 50%, rgba(46,164,255,0.12) 0%, transparent 70%)',
+          background: 'radial-gradient(ellipse 70% 50% at 20% 50%, rgba(255, 255, 255, 0.12) 0%, transparent 70%)',
         }}
       />
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse 50% 60% at 80% 50%, rgba(1,84,166,0.15) 0%, transparent 70%)',
+          background: 'radial-gradient(ellipse 50% 60% at 80% 50%, rgba(24, 43, 63, 0.15) 0%, transparent 70%)',
         }}
       />
 
@@ -109,7 +109,7 @@ export default function CTASection() {
             {/* Tag */}
             <div
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold tracking-widest uppercase mb-6"
-              style={{ background: 'rgba(117,194,255,0.15)', border: '1px solid rgba(117,194,255,0.3)', color: '#75c2ff' }}
+              style={{ background: 'rgba(117,194,255,0.15)', border: '1px solid rgba(117,194,255,0.3)', color: '#ffffff' }}
             >
               <div className="w-2 h-2 rounded-full bg-glass-400 animate-pulse" />
               Fale com a Linde Vidros
@@ -119,7 +119,7 @@ export default function CTASection() {
               Transforme seu{' '}
               <span
                 style={{
-                  background: 'linear-gradient(135deg, #75c2ff 0%, #2ea4ff 100%)',
+                  background: 'linear-gradient(135deg, #ffffff 0%, #ffffff 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
@@ -173,7 +173,11 @@ export default function CTASection() {
             <div className="w-px h-12 bg-white/15" />
 
             {/* Large logo */}
-            <Logo size="lg" />
+              <img
+        src="/public/images/logonavbar.png"
+        alt="Linde Vidros 60 anos"
+        className="w-56 md:w-64 h-auto object-contain -mb-12"
+          />
             <p className="text-white/30 text-xs font-medium tracking-[0.25em] uppercase text-center">
               Soluções em vidro de alto padrão
             </p>
