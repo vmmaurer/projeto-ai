@@ -142,7 +142,7 @@ export const beforeAfterExamples = [
   {
     id: 1,
     label: 'Escritório Corporativo',
-    before: '/images/casacolor13.jpg',
+    before: '/images/casacolor13-vblack.png',
     after: '/images/casacolor13.jpg',
   },
   {
