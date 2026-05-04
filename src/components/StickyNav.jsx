@@ -92,7 +92,7 @@ export default function StickyNav() {
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
             <img
-              src="/public/images/logonavbar.png"
+              src="/images/logonavbar.png"
               alt="Linde Vidros 60 anos"
               style={{
                 height: `${NAV_HEIGHT - -18}px`,
