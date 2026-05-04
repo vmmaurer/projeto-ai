@@ -9,9 +9,12 @@ export default function HeroSection() {
 
   return (
     <section
-      className="relative min-h-screen flex flex-col overflow-hidden"
+      className="relative flex flex-col overflow-hidden"
       style={{
+         minHeight: '100vh',
+        height: 'auto', // ← permite altura dinâmica
         background: 'linear-gradient(180deg, #040b19 0%, #405b7a 50%, #040b19 100%)',
+
       }}
     >
       {/* Ambient background orbs */}
@@ -51,11 +54,11 @@ export default function HeroSection() {
       </header>
 
       {/* Hero headline */}
-      <div className="relative z-10 text-center px-8 pt-8 pb-4">
-        <p className="text-glass-100 text-sm font-Montserrat tracking-[0.35em] uppercase mb-3">
+      <div className="relative z-10 text-center px-4 md:px-8 pt-6 md:pt-8 pb-2 md:pb-4">
+        <p className="text-glass-100 text-xs md:text-sm font-Montserrat tracking-[0.35em] uppercase mb-2 md:mb-3">
           Qualidade que transforma espaços
         </p>
-        <h1 className="font-display text-5xl md:text-6xl font-Montserrat leading-tight mb-4">
+        <h1 className="font-display text-3xl md:text-5xl lg:text-6xl font-Montserrat leading-tight mb-3 md:mb-4">
           <span className="text-white">Vidros de </span>
           <span
             style={{
@@ -68,13 +71,13 @@ export default function HeroSection() {
             Alto Padrão
           </span>
         </h1>
-        <p className="text-white/55 text-lg max-w-xl mx-auto leading-relaxed font-Montserrat">
+        <p className="text-white/55 text-sm md:text-lg max-w-xl mx-auto leading-relaxed font-Montserrat px-4">
           Explore nossas soluções e descubra como o vidro pode transformar arquitetura e design
         </p>
       </div>
 
-      {/* Carousel */}
-      <div className="relative z-10 flex-1 flex items-center mt-2">
+      {/* Carousel altura ajustada para mobile */}
+      <div className="relative z-10 flex-1 flex items-center mt-2 min-h-[500px] md:min-h-[600px]">
         <div className="w-full">
           <ArcCarousel items={products} onCardTap={setActiveProduct} />
         </div>

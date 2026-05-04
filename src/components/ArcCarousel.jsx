@@ -5,13 +5,23 @@ export default function ArcCarousel({ items, onCardTap }) {
   const [isDragging, setIsDragging] = useState(false)
   const [dragOffset, setDragOffset] = useState(0)
   const [isAnimating, setIsAnimating] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
   const touchStartX = useRef(null)
+  const touchStartY = useRef(null) 
   const autoRotateTimer = useRef(null)
   const resumeTimer = useRef(null)
   const dragStartX = useRef(0)
   const containerRef = useRef(null)
   const count = items.length
+
+   // Detecta mobile
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   // Auto-rotate
   const startAutoRotate = useCallback(() => {
@@ -57,6 +67,7 @@ export default function ArcCarousel({ items, onCardTap }) {
   // Touch handlers
   const handlePointerDown = (e) => {
     touchStartX.current = e.clientX
+    touchStartY.current = e.clientY
     dragStartX.current = e.clientX
     setIsDragging(true)
     pauseAndScheduleResume()
@@ -67,17 +78,30 @@ export default function ArcCarousel({ items, onCardTap }) {
     if (!isDragging || touchStartX.current === null) return
     const delta = e.clientX - dragStartX.current
     setDragOffset(delta)
-  }
 
+  // ← CORRIGIDO: código estava fora da função
+    const deltaY = Math.abs(e.clientY - (touchStartY.current || e.clientY))
+    const deltaX = Math.abs(delta)
+    
+    // Só previne scroll se arrastar mais horizontalmente que verticalmente
+    if (deltaX > deltaY && deltaX > 15) {
+      e.preventDefault()
+    }
+  }
   const handlePointerUp = (e) => {
     if (!isDragging) return
     const delta = e.clientX - (touchStartX.current || e.clientX)
-    const threshold = 60
+
+    // Calcula movimento baseado na distância
+  const cardWidth = 350
+  const cardsToMove = Math.max(1, Math.round(Math.abs(delta) / cardWidth))
+  const threshold = 30 // ← mais sensível ainda
+
     if (Math.abs(delta) > threshold) {
-      if (delta < 0) {
-        goNext()
+       if (delta < 0) {
+        goTo(currentIndex + cardsToMove) // ← CORRIGIDO: usa cardsToMove
       } else {
-        goPrev()
+        goTo(currentIndex - cardsToMove) // ← CORRIGIDO: usa cardsToMove
       }
     }
     setIsDragging(false)
@@ -138,8 +162,8 @@ export default function ArcCarousel({ items, onCardTap }) {
     }
   }
 
-  const CARD_W = 320
-  const CARD_H = 460
+  const CARD_W = isMobile ? 280 : 320
+  const CARD_H = isMobile ? 400 : 460
 
   return (
     <div className="relative w-full select-none" style={{ height: `${CARD_H + 120}px` }}>
@@ -150,6 +174,12 @@ export default function ArcCarousel({ items, onCardTap }) {
         style={{
           perspective: '1200px',
           perspectiveOrigin: '50% 40%',
+          touchAction: 'pan-y', // permite scroll vertical
+          WebkitTouchCallout: 'none', // previne menu de contexto no iOS
+          paddingTop: '40px', // ← área extra de toque no topo
+          paddingBottom: '40px', // ← área extra de toque embaixo
+          marginTop: '-40px',
+          marginBottom: '-40px',
         }}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
