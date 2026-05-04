@@ -174,7 +174,7 @@ export default function CTASection() {
 
             {/* Large logo */}
               <img
-        src="/public/images/logonavbar.png"
+        src="/images/logonavbar.png"
         alt="Linde Vidros 60 anos"
         className="w-56 md:w-64 h-auto object-contain -mb-12"
           />

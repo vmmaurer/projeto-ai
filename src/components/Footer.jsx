@@ -13,7 +13,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
         <div className="flex flex-col items-center md:items-start gap-3">
           <img
-        src="/public/images/logonavbar.png"
+        src="/images/logonavbar.png"
         alt="Linde Vidros 60 anos"
         className="w-56 md:w-64 h-auto object-contain -mb-12"
           />
