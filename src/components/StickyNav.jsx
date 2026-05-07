@@ -103,41 +103,26 @@ export default function StickyNav() {
             />
           </div>
 
-     {/* Direita — Botão E-commerce */}
-          <div className="flex items-center justify-end">
-            
-              <a href="https://ecommerce.lindevidros.com.br/Login.aspx?ReturnUrl=%2f"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-2 px-4 md:px-4 py-3 rounded-xl transition-all duration-300 active:scale-95 hover:scale-105"
-              style={{
-                background: 'linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%)',
-                border: '1px solid rgba(255,255,255,0.1)',
-                backdropFilter: 'blur(8px)',
-              }}
-            >
-              <img
-                src="/images/ECOMMERCE_grande.png"
-                alt="E-commerce Linde Vidros"
-                className="h-8 md:h-8 w-auto object-contain transition-opacity duration-300 group-hover:opacity-80"
-              />
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                className="opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-300"
-              >
-                <path
-                  d="M6 3L11 8L6 13"
-                  stroke="white"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </a>
-          </div>
+ {/* Direita — Botão E-commerce */}
+<div className="flex items-center justify-end">
+  
+   <a href="https://ecommerce.lindevidros.com.br/Login.aspx?ReturnUrl=%2f"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="transition-all duration-300 active:scale-95 hover:scale-105 hover:opacity-90"
+  >
+    <img
+      src="/images/ECOMMERCE HORIZONTAL.png"
+      alt="E-commerce Linde Vidros"
+      style={{
+        height: `${NAV_HEIGHT - 30}px`,
+        width: 'auto',
+        objectFit: 'contain',
+        display: 'block',
+      }}
+    />
+  </a>
+</div>
         </div>
       </nav>
 
