@@ -1,123 +1,396 @@
-import React from 'react'
-
-const solutions = [
+import React, { useRef, useEffect, useCallback, useState } from 'react'
+ 
+const milestones = [
   {
-    icon: (
-      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-        <rect x="4" y="4" width="24" height="24" rx="3" stroke="#75c2ff" strokeWidth="2"/>
-        <path d="M4 12H28M4 20H28M12 4V28M20 4V28" stroke="#75c2ff" strokeWidth="1.5" opacity="0.5"/>
-      </svg>
-    ),
-    title: 'Vidros Arquitetônicos',
-    desc: 'Soluções para fachadas, coberturas e divisórias de alto padrão.',
+    image: '/images/linde_1989.jpeg',
+    year: '1989',
+    desc: 'Fundação da Linde Vidros, iniciando uma trajetória de inovação e qualidade no setor vidreiro.',
   },
   {
-    icon: (
-      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-        <path d="M16 4L28 28H4L16 4Z" stroke="#75c2ff" strokeWidth="2" fill="none"/>
-        <path d="M16 14V20M16 23V24" stroke="#75c2ff" strokeWidth="2" strokeLinecap="round"/>
-      </svg>
-    ),
-    title: 'Segurança e Resistência',
-    desc: 'Vidros temperados e laminados com certificação de segurança ABNT.',
+    image: '/images/linde_1991.jpg',
+    year: '1991',
+    desc: 'Em agosto de 1991 foi fundada uma filial na cidade de Rio Negro – PR para a distribuição em chapas de vidros em geral, atendendo outras regiões.',
   },
   {
-    icon: (
-      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-        <circle cx="16" cy="16" r="12" stroke="#75c2ff" strokeWidth="2"/>
-        <path d="M10 16C10 16 12 12 16 12C20 12 22 16 22 16C22 16 20 20 16 20C12 20 10 16 10 16Z" stroke="#75c2ff" strokeWidth="1.5"/>
-        <circle cx="16" cy="16" r="3" fill="#75c2ff" opacity="0.7"/>
-      </svg>
-    ),
-    title: 'Controle Solar',
-    desc: 'Filtros UV e tratamentos que protegem sem bloquear a luminosidade natural.',
+    image: '/images/linde_1993.jpg',
+    year: '1993',
+    desc: 'Nos últimos anos, a unidade de Rio Negro vem investindo em máquinas de última geração para melhor corte e acabamento.',
   },
   {
-    icon: (
-      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-        <rect x="6" y="10" width="20" height="14" rx="2" stroke="#75c2ff" strokeWidth="2"/>
-        <path d="M6 14H26M12 10V8C12 6.9 12.9 6 14 6H18C19.1 6 20 6.9 20 8V10" stroke="#75c2ff" strokeWidth="1.5" strokeLinecap="round"/>
-      </svg>
-    ),
-    title: 'Vidros para Interiores',
-    desc: 'Boxes, espelhos, divisórias e prateleiras para ambientes residenciais e comerciais.',
+    image: '/images/linde_1995.jpg',
+    year: '1995',
+    desc: 'No ano 2000 foi instalado um forno de tempera vertical.',
   },
   {
-    icon: (
-      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-        <path d="M8 28V8L16 4L24 8V28H8Z" stroke="#75c2ff" strokeWidth="2" fill="none"/>
-        <path d="M13 28V18H19V28" stroke="#75c2ff" strokeWidth="1.5"/>
-        <rect x="12" y="10" width="4" height="4" stroke="#75c2ff" strokeWidth="1.5"/>
-        <rect x="18" y="10" width="4" height="4" stroke="#75c2ff" strokeWidth="1.5" opacity="0.6"/>
-      </svg>
-    ),
-    title: 'Aplicações Comerciais',
-    desc: 'Projetos completos para varejistas, hotéis, escritórios e edifícios corporativos.',
+    image: '/images/linde_2004.jpg',
+    year: '2004',
+    desc: 'A grande mudança ocorreu em 2003 com a aquisição de um forno de tempera horizontal para vidros de 2,8mm até 19mm.',
   },
   {
-    icon: (
-      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-        <circle cx="16" cy="16" r="6" stroke="#75c2ff" strokeWidth="2"/>
-        <path d="M16 4V8M16 24V28M4 16H8M24 16H28M7.5 7.5L10.3 10.3M21.7 21.7L24.5 24.5M24.5 7.5L21.7 10.3M10.3 21.7L7.5 24.5" stroke="#75c2ff" strokeWidth="1.5" strokeLinecap="round"/>
-      </svg>
-    ),
-    title: 'Eficiência Energética',
+    image: '/images/linde_2007.jpg',
+    year: '2007',
+    desc: 'Em março de 2008 foi instalado seu segundo forno horizontal.',
+  },
+  {
+    image: '/images/linde_2009.jpg',
+    year: '2009',
     desc: 'Vidros insulados de alto desempenho para redução do consumo de energia.',
   },
+  {
+    image: '/images/linde_2012.jpg',
+    year: '2012',
+    desc: 'Segurança e design com múltiplas camadas de proteção.',
+  },
+  {
+    image: '/images/linde_2014.jpg',
+    year: '2014',
+    desc: 'Resistência e durabilidade para aplicações de alto impacto.',
+  },
+  {
+    image: '/images/linde_2018.jpg',
+    year: '2018',
+    desc: 'Isolamento térmico e acústico para maior conforto.',
+  },
+  {
+    image: '/images/linde_2025_1.jpg',
+    year: '2025',
+    label: 'Fábrica 1',
+    desc: 'Personalização com impressão de alta qualidade.',
+  },
+  {
+    image: '/images/linde_2025_2.jpg',
+    year: '2025',
+    label: 'Fábrica 2',
+    desc: 'Espelhos sob medida para todos os ambientes.',
+  },
 ]
-
-export default function OQueFazemos() {
+ 
+const CARD_WIDTH = 240
+const CARD_GAP   = 48
+const CARD_TOTAL = CARD_WIDTH + CARD_GAP
+const SPEED      = 0.55
+ 
+// Altura reservada para card + conector + badge em cada lado
+const CARD_AREA   = 260  // card acima ou abaixo
+const CONN_HEIGHT = 68   // conector (linha 28 + ponto 12 + linha 28)
+const BADGE_AREA  = 40   // badge de ano
+ 
+// Altura total de cada item no track
+// A linha horizontal fica exatamente no centro vertical do track
+// que é: CARD_AREA + CONN_HEIGHT/2  de cima
+ 
+// ─── Lightbox ──────────────────────────────────────────────────────────────
+function Lightbox({ item, onClose, onPrev, onNext }) {
+  useEffect(() => {
+    const h = (e) => { if (e.key === 'Escape') onClose() }
+    window.addEventListener('keydown', h)
+    return () => window.removeEventListener('keydown', h)
+  }, [onClose])
+ 
+  if (!item) return null
   return (
-    <section
-      className="relative py-28 px-6 md:px-12 overflow-hidden"
-      style={{
-        background: 'linear-gradient(180deg, #040b19 0%, #405b7a 50%, #040b19 100%)',
-      }}
-    >
-      {/* Background accent */}
-      <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 pointer-events-none"
-        style={{
-          width: 900,
-          height: 400,
-          background: 'radial-gradient(ellipse, rgba(46,164,255,0.07) 0%, transparent 70%)',
-        }}
-      />
-
-      <div className="relative z-10 max-w-6xl mx-auto">
-        {/* Section header */}
-        <div className="text-center mb-16">
-          <p className="text-glass-300 text-xs font-semibold tracking-[0.4em] uppercase mb-3">
-            Nossa especialidade
-          </p>
-          <h2 className="font-display text-5xl font-bold text-white mb-5">
-            O que fazemos
-          </h2>
-          <div className="w-16 h-0.5 bg-glass-400 mx-auto mb-6" />
-          <p className="text-white/55 text-xl max-w-2xl mx-auto leading-relaxed">
-            Da concepção à instalação, entregamos soluções em vidro que elevam a qualidade e a estética de qualquer projeto arquitetônico.
-          </p>
+    <div onClick={onClose} style={{
+      position: 'fixed', inset: 0, zIndex: 1000,
+      background: 'rgba(2,6,18,0.92)',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      padding: 24, backdropFilter: 'blur(10px)',
+      animation: 'lbFade .2s ease',
+    }}>
+      <style>{`
+        @keyframes lbFade { from{opacity:0} to{opacity:1} }
+        @keyframes lbUp   { from{opacity:0;transform:translateY(20px) scale(.97)} to{opacity:1;transform:none} }
+      `}</style>
+      <div onClick={e => e.stopPropagation()} style={{
+        position: 'relative', maxWidth: 720, width: '100%',
+        background: 'linear-gradient(145deg,rgba(10,22,50,.98),rgba(4,11,25,.98))',
+        border: '1px solid rgba(46,164,255,.18)', borderRadius: 20, overflow: 'hidden',
+        boxShadow: '0 32px 80px rgba(0,0,0,.7)', animation: 'lbUp .25s ease',
+      }}>
+        <div style={{ position: 'relative', maxHeight: 420, overflow: 'hidden' }}>
+          <img src={item.image} alt={item.year} style={{ width: '100%', maxHeight: 420, objectFit: 'cover', display: 'block' }} />
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top,rgba(4,11,25,1) 0%,rgba(4,11,25,.3) 50%,transparent 100%)' }} />
+          <div style={{ position: 'absolute', bottom: 20, left: 24, display: 'flex', alignItems: 'center', gap: 10 }}>
+            <span style={{ background: '#2ea4ff', color: '#040b19', fontWeight: 800, fontSize: 22, padding: '6px 18px', borderRadius: 8 }}>{item.year}</span>
+            {item.label && <span style={{ color: 'rgba(255,255,255,.7)', fontSize: 15, fontWeight: 600 }}>{item.label}</span>}
+          </div>
+          <button onClick={onClose} style={{
+            position: 'absolute', top: 14, right: 14, width: 36, height: 36,
+            borderRadius: '50%', background: 'rgba(0,0,0,.55)', border: '1px solid rgba(255,255,255,.15)',
+            color: '#fff', fontSize: 18, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+            transition: 'background .2s',
+          }}
+            onMouseEnter={e => e.currentTarget.style.background = 'rgba(46,164,255,.35)'}
+            onMouseLeave={e => e.currentTarget.style.background = 'rgba(0,0,0,.55)'}
+          >✕</button>
         </div>
-
-        {/* Solutions grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {solutions.map((s, i) => (
-            <div
-              key={i}
-              className="rounded-2xl p-7 transition-all duration-300 active:scale-95"
-              style={{
-                background: 'linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%)',
-                border: '1px solid rgba(255,255,255,0.1)',
-                touchAction: 'manipulation',
+        <div style={{ padding: '22px 28px 28px' }}>
+          <p style={{ color: 'rgba(255,255,255,.72)', fontSize: 15, lineHeight: 1.75, margin: '0 0 24px' }}>{item.desc}</p>
+          <div style={{ display: 'flex', gap: 12 }}>
+            {[['← Anterior', onPrev, false], ['Próximo →', onNext, true]].map(([label, fn, primary]) => (
+              <button key={label} onClick={fn} style={{
+                flex: 1, padding: '10px 0', borderRadius: 10, fontSize: 13, fontWeight: 600, cursor: 'pointer', transition: 'all .2s',
+                background: primary ? 'rgba(46,164,255,.12)' : 'rgba(255,255,255,.05)',
+                border: primary ? '1px solid rgba(46,164,255,.3)' : '1px solid rgba(255,255,255,.1)',
+                color: primary ? '#2ea4ff' : 'rgba(255,255,255,.7)',
               }}
-            >
-              <div className="mb-5 opacity-90">{s.icon}</div>
-              <h3 className="text-white font-semibold text-xl mb-2">{s.title}</h3>
-              <p className="text-white/55 text-base leading-relaxed">{s.desc}</p>
-            </div>
-          ))}
+                onMouseEnter={e => e.currentTarget.style.background = primary ? 'rgba(46,164,255,.25)' : 'rgba(46,164,255,.15)'}
+                onMouseLeave={e => e.currentTarget.style.background = primary ? 'rgba(46,164,255,.12)' : 'rgba(255,255,255,.05)'}
+              >{label}</button>
+            ))}
+          </div>
         </div>
       </div>
-    </section>
+    </div>
   )
 }
+ 
+// ─── Card ──────────────────────────────────────────────────────────────────
+// Estrutura para card ACIMA da linha:
+//   [badge]
+//   [conn-top: linha↑ + ponto + linha↓]
+//   [card visual]
+//
+// Estrutura para card ABAIXO da linha:
+//   [card visual]
+//   [conn-top: linha↑ + ponto + linha↓]
+//   [badge]
+//
+// A linha horizontal passa exatamente pelo centro do ponto.
+// Não existe nenhum position:absolute que possa "vazar" para cima dos cards.
+ 
+function Card({ item, index, onOpen }) {
+  const isAbove = index % 2 === 0
+  const wasDrag = useRef(false)
+ 
+  const badge = (
+    <div style={{ textAlign: 'center', padding: isAbove ? '0 0 6px' : '6px 0 0', flexShrink: 0 }}>
+      <span style={{
+        display: 'inline-block', background: '#2ea4ff', color: '#040b19',
+        fontWeight: 800, fontSize: 13, letterSpacing: '.05em', padding: '4px 12px', borderRadius: 6,
+      }}>{item.year}</span>
+      {item.label && (
+        <p style={{ color: 'rgba(255,255,255,.45)', fontSize: 11, margin: '4px 0 0', fontWeight: 600 }}>{item.label}</p>
+      )}
+    </div>
+  )
+ 
+  // O conector: linha vertical — ponto — linha vertical
+  // O ponto é o centro exato onde a linha horizontal passa
+  const connector = (
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flexShrink: 0 }}>
+      <div style={{ width: 2, height: 28, background: 'rgba(46,164,255,.5)' }} />
+      <div style={{
+        width: 13, height: 13, borderRadius: '50%', flexShrink: 0,
+        background: '#2ea4ff', boxShadow: '0 0 14px rgba(46,164,255,.9)',
+      }} />
+      <div style={{ width: 2, height: 28, background: 'rgba(46,164,255,.5)' }} />
+    </div>
+  )
+ 
+  const cardVisual = (
+    <div
+      onMouseDown={() => { wasDrag.current = false }}
+      onMouseMove={() => { wasDrag.current = true }}
+      onMouseUp={() => { if (!wasDrag.current) onOpen() }}
+      onTouchEnd={() => onOpen()}
+      style={{
+        width: CARD_WIDTH, flexShrink: 0,
+        background: 'rgba(255,255,255,.045)',
+        border: '1px solid rgba(255,255,255,.11)',
+        borderRadius: 16, overflow: 'hidden',
+        boxShadow: '0 6px 30px rgba(0,0,0,.5)',
+        cursor: 'pointer',
+        transition: 'transform .25s ease, box-shadow .25s ease',
+      }}
+      onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.04)'; e.currentTarget.style.boxShadow = '0 10px 40px rgba(46,164,255,.25)' }}
+      onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.boxShadow = '0 6px 30px rgba(0,0,0,.5)' }}
+    >
+      <div style={{ position: 'relative', height: 140, overflow: 'hidden' }}>
+        <img src={item.image} alt={item.year} draggable={false}
+          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top,rgba(4,11,25,.82) 0%,transparent 55%)' }} />
+        <div style={{
+          position: 'absolute', top: 8, right: 8, width: 28, height: 28, borderRadius: '50%',
+          background: 'rgba(46,164,255,.2)', border: '1px solid rgba(46,164,255,.4)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13,
+        }}>🔍</div>
+      </div>
+      <div style={{ padding: '12px 14px' }}>
+        <p style={{ color: 'rgba(255,255,255,.5)', fontSize: 11, lineHeight: 1.65, margin: 0 }}>{item.desc}</p>
+      </div>
+    </div>
+  )
+ 
+  return (
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      // Todos os itens têm a mesma altura total para que o ponto central fique alinhado
+      width: CARD_WIDTH,
+      flexShrink: 0,
+      userSelect: 'none',
+    }}>
+      {isAbove ? (
+        <>
+          {badge}
+          {connector}
+          {cardVisual}
+        </>
+      ) : (
+        <>
+          {cardVisual}
+          {connector}
+          {badge}
+        </>
+      )}
+    </div>
+  )
+}
+ 
+// ─── Componente principal ──────────────────────────────────────────────────
+export default function LinhaDoTempo() {
+  const trackRef     = useRef(null)
+  const offsetRef    = useRef(0)
+  const rafRef       = useRef(null)
+  const isDragging   = useRef(false)
+  const dragStartX   = useRef(0)
+  const dragStartOff = useRef(0)
+  const isPaused     = useRef(false)
+  const resumeTimer  = useRef(null)
+  const [selected, setSelected] = useState(null)
+ 
+  const items     = [...milestones, ...milestones, ...milestones]
+  const loopWidth = milestones.length * CARD_TOTAL
+ 
+  const clamp = (v) => {
+    if (v >= loopWidth * 2) return v - loopWidth
+    if (v < loopWidth)      return v + loopWidth
+    return v
+  }
+ 
+  const animate = useCallback(() => {
+    if (!isPaused.current) offsetRef.current = clamp(offsetRef.current + SPEED)
+    if (trackRef.current) trackRef.current.style.transform = `translateX(${-offsetRef.current}px)`
+    rafRef.current = requestAnimationFrame(animate)
+  }, [loopWidth])
+ 
+  useEffect(() => {
+    offsetRef.current = loopWidth
+    rafRef.current = requestAnimationFrame(animate)
+    return () => cancelAnimationFrame(rafRef.current)
+  }, [animate, loopWidth])
+ 
+  useEffect(() => { if (selected !== null) isPaused.current = true }, [selected])
+ 
+  const pauseAuto = () => { isPaused.current = true; clearTimeout(resumeTimer.current) }
+  const resumeAuto = () => {
+    if (selected !== null) return
+    resumeTimer.current = setTimeout(() => { isPaused.current = false }, 1500)
+  }
+ 
+  const openCard  = (i) => setSelected(i % milestones.length)
+  const closeCard = () => { setSelected(null); resumeTimer.current = setTimeout(() => { isPaused.current = false }, 800) }
+  const prevCard  = () => setSelected(s => (s - 1 + milestones.length) % milestones.length)
+  const nextCard  = () => setSelected(s => (s + 1) % milestones.length)
+ 
+  const onMouseDown = (e) => { isDragging.current = true; dragStartX.current = e.clientX; dragStartOff.current = offsetRef.current; pauseAuto(); e.currentTarget.style.cursor = 'grabbing' }
+  const onMouseMove = (e) => { if (!isDragging.current) return; offsetRef.current = clamp(dragStartOff.current + (dragStartX.current - e.clientX)) }
+  const onMouseUp   = (e) => { if (!isDragging.current) return; isDragging.current = false; e.currentTarget.style.cursor = 'grab'; resumeAuto() }
+  const onTouchStart = (e) => { dragStartX.current = e.touches[0].clientX; dragStartOff.current = offsetRef.current; pauseAuto() }
+  const onTouchMove  = (e) => { offsetRef.current = clamp(dragStartOff.current + (dragStartX.current - e.touches[0].clientX)) }
+  const onTouchEnd   = () => resumeAuto()
+ 
+  return (
+    <>
+      <section style={{ position: 'relative', padding: '80px 0 60px', background: '#040b19', overflow: 'hidden' }}>
+ 
+        {/* Glow */}
+        <div style={{
+          position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)',
+          width: 1000, height: 500,
+          background: 'radial-gradient(ellipse,rgba(46,164,255,.07) 0%,transparent 70%)',
+          pointerEvents: 'none',
+        }} />
+ 
+        {/* Cabeçalho */}
+        <div style={{ textAlign: 'center', marginBottom: 60, position: 'relative', zIndex: 10 }}>
+          <p style={{ color: 'rgba(46,164,255,.85)', fontSize: 11, fontWeight: 700, letterSpacing: '.4em', textTransform: 'uppercase', margin: '0 0 12px' }}>
+            Quem Somos?
+          </p>
+          <h2 style={{ color: '#fff', fontSize: 44, fontWeight: 800, margin: '0 0 16px', letterSpacing: '-.02em' }}>
+            A Linde Vidros
+          </h2>
+          <div style={{ width: 48, height: 2, background: 'rgba(46,164,255,.5)', margin: '0 auto 14px', borderRadius: 2 }} />
+          <p style={{ color: 'rgba(255,255,255,.28)', fontSize: 12, margin: 0 }}>
+            Clique em um card para ver mais · Arraste para explorar
+          </p>
+        </div>
+ 
+       {/* Carrossel */}
+<div
+  style={{ position: 'relative', overflow: 'hidden', cursor: 'grab' }}
+  onMouseDown={onMouseDown}
+  onMouseMove={onMouseMove}
+  onMouseUp={onMouseUp}
+  onMouseLeave={onMouseUp}
+  onTouchStart={onTouchStart}
+  onTouchMove={onTouchMove}
+  onTouchEnd={onTouchEnd}
+>
+  {/* Linha horizontal — FORA do track, em camada separada */}
+  <div
+    style={{
+      position: 'absolute',
+      top: '50%',
+      left: 0,
+      right: 0,
+      height: 2,
+      marginTop: -1,
+      background: 'rgba(46,164,255,.32)',
+      transform: `translateX(${-offsetRef.current}px)`,
+      willChange: 'transform',
+      zIndex: 0, // ← camada base
+      pointerEvents: 'none',
+    }}
+  />
+
+  {/* Track com os cards — zIndex maior que a linha */}
+  <div
+    ref={trackRef}
+    style={{
+      position: 'relative',
+      zIndex: 1, // ← sempre acima da linha
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 0,
+      willChange: 'transform',
+      padding: '20px 60px',
+    }}
+  >
+    {items.map((item, i) => (
+      <div key={i} style={{ margin: `0 ${CARD_GAP / 2}px` }}>
+        <Card item={item} index={i} onOpen={() => openCard(i)} />
+      </div>
+    ))}
+  </div>
+</div>
+        
+ 
+        {/* Fades laterais */}
+        {[['left','90deg'],['right','270deg']].map(([side, deg]) => (
+          <div key={side} style={{
+            position: 'absolute', top: 0, [side]: 0, bottom: 0, width: 100,
+            background: `linear-gradient(${deg},#040b19 0%,transparent 100%)`,
+            pointerEvents: 'none', zIndex: 20,
+          }} />
+        ))}
+      </section>
+ 
+      {selected !== null && (
+        <Lightbox item={milestones[selected]} onClose={closeCard} onPrev={prevCard} onNext={nextCard} />
+      )}
+    </>
+  )
+}
+ 

@@ -7,33 +7,34 @@
     -webkit-tap-highlight-color: transparent;
     box-sizing: border-box;
   }
+}
 
-  html {
-    font-size: 18px;
-    scroll-behavior: smooth;
-    overflow-x: hidden;
-  }
+html {
+  font-size: 18px;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
 
-  body {
-    background-color: #010f40;
-    color: white;
-    font-family: 'Inter', system-ui, sans-serif;
-    overflow-x: hidden;
-    cursor: default;
-    user-select: none;
-    -webkit-user-select: none;
-  }
+body {
+  background-color: #040b19;
+  color: white;
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow-x: hidden;
+  cursor: default;
+  user-select: none;
+  -webkit-user-select: none;
+}
 
-  ::-webkit-scrollbar {
-    width: 0;
-    background: transparent;
-  }
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
 }
 
 @layer components {
   .glass-card {
-    @apply bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl;
+  @apply bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl;
   }
+
 
   .glass-panel {
     background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%);

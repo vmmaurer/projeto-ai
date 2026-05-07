@@ -8,7 +8,7 @@ export default function Galeria() {
     <section
       className="relative py-28 px-6 md:px-12 overflow-hidden"
       style={{
-        background: 'linear-gradient(180deg, #040b19 0%, #405b7a 50%, #040b19 100%)',
+        background: 'linear-gradient(180deg, #040b19 0%, #040b19 50%, #040b19 100%)',
       }}
     >
       <div className="relative z-10 max-w-6xl mx-auto">

@@ -44,7 +44,7 @@ export default function App() {
   }, []);
 
   return (
-    <div className="relative" style={{ paddingTop: '100px' }}>
+    <div className="relative pt-20 md:pt-[130px]" style={{ paddingTop: '100px' }}>
       <StickyNav />
       
       <div id="hero"><HeroSection /></div>

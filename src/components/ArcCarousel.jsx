@@ -78,7 +78,7 @@ export default function ArcCarousel({ items, onCardTap }) {
     if (!isDragging || touchStartX.current === null) return
     const delta = e.clientX - dragStartX.current
     setDragOffset(delta)
-
+    
   // ← CORRIGIDO: código estava fora da função
     const deltaY = Math.abs(e.clientY - (touchStartY.current || e.clientY))
     const deltaX = Math.abs(delta)

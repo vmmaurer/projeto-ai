@@ -56,7 +56,7 @@ export default function Processo() {
     <section
       className="relative py-28 px-6 md:px-12 overflow-hidden"
       style={{
-        background: 'linear-gradient(180deg, #040b19 0%, #405b7a 50%, #040b19 100%)',
+        background: 'linear-gradient(180deg, #040b19 0%, #040b19 50%, #040b19 100%)',
       }}
     >
       {/* Background lines */}
