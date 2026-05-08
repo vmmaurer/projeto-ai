@@ -195,7 +195,7 @@ function Card({ item, index, onOpen }) {
       onTouchEnd={() => onOpen()}
       style={{
         width: CARD_WIDTH, flexShrink: 0,
-        background: 'rgba(255,255,255,.045)',
+        background: 'linear-gradient(180deg, #0b1830 0%, #091426 100%)',
         border: '1px solid rgba(255,255,255,.11)',
         borderRadius: 16, overflow: 'hidden',
         boxShadow: '0 6px 30px rgba(0,0,0,.5)',
@@ -393,4 +393,3 @@ export default function LinhaDoTempo() {
     </>
   )
 }
- 
