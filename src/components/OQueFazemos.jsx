@@ -76,7 +76,7 @@ const CONN_HEIGHT = 68   // conector (linha 28 + ponto 12 + linha 28)
 const BADGE_AREA  = 40   // badge de ano
  
 // Altura total de cada item no track
-// A linha horizontal fica exatamente no centro vertical do track
+// A linha horizontal fica exatamente no centro vertical do track teste
 // que é: CARD_AREA + CONN_HEIGHT/2  de cima
  
 // ─── Lightbox ──────────────────────────────────────────────────────────────
