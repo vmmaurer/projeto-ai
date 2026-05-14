@@ -13,6 +13,7 @@ export default function ArcCarousel({ items, onCardTap }) {
   const resumeTimer = useRef(null)
   const dragStartX = useRef(0)
   const containerRef = useRef(null)
+  const cardClickStart = useRef({ x: 0, y: 0 }) // Track click start position on cards
   const count = items.length
 
    // Detecta mobile
@@ -64,14 +65,13 @@ export default function ArcCarousel({ items, onCardTap }) {
     pauseAndScheduleResume()
   }, [currentIndex, goTo, pauseAndScheduleResume])
 
-  // Touch handlers
+  // Touch handlers for container drag
   const handlePointerDown = (e) => {
     touchStartX.current = e.clientX
     touchStartY.current = e.clientY
     dragStartX.current = e.clientX
     setIsDragging(true)
     pauseAndScheduleResume()
-    e.currentTarget.setPointerCapture(e.pointerId)
   }
 
   const handlePointerMove = (e) => {
@@ -79,7 +79,6 @@ export default function ArcCarousel({ items, onCardTap }) {
     const delta = e.clientX - dragStartX.current
     setDragOffset(delta)
     
-  // ← CORRIGIDO: código estava fora da função
     const deltaY = Math.abs(e.clientY - (touchStartY.current || e.clientY))
     const deltaX = Math.abs(delta)
     
@@ -88,20 +87,20 @@ export default function ArcCarousel({ items, onCardTap }) {
       e.preventDefault()
     }
   }
+
   const handlePointerUp = (e) => {
     if (!isDragging) return
     const delta = e.clientX - (touchStartX.current || e.clientX)
 
-    // Calcula movimento baseado na distância
-  const cardWidth = 350
-  const cardsToMove = Math.max(1, Math.round(Math.abs(delta) / cardWidth))
-  const threshold = 30 // ← mais sensível ainda
+    const cardWidth = 350
+    const cardsToMove = Math.max(1, Math.round(Math.abs(delta) / cardWidth))
+    const threshold = 30
 
     if (Math.abs(delta) > threshold) {
-       if (delta < 0) {
-        goTo(currentIndex + cardsToMove) // ← CORRIGIDO: usa cardsToMove
+      if (delta < 0) {
+        goTo(currentIndex + cardsToMove)
       } else {
-        goTo(currentIndex - cardsToMove) // ← CORRIGIDO: usa cardsToMove
+        goTo(currentIndex - cardsToMove)
       }
     }
     setIsDragging(false)
@@ -115,9 +114,25 @@ export default function ArcCarousel({ items, onCardTap }) {
     touchStartX.current = null
   }
 
-  // Card tap — only if we didn't drag
-  const handleCardTap = (item, itemIndex) => {
-    if (Math.abs(dragOffset) > 10) return
+  // Card mouse/touch handlers
+  const handleCardPointerDown = (e) => {
+    cardClickStart.current = { x: e.clientX, y: e.clientY }
+  }
+
+  // Card click — only if we didn't drag significantly
+  const handleCardClick = (e, item, itemIndex) => {
+    e.stopPropagation()
+    
+    // Calculate distance from initial click
+    const dx = Math.abs(e.clientX - cardClickStart.current.x)
+    const dy = Math.abs(e.clientY - cardClickStart.current.y)
+    const distance = Math.sqrt(dx * dx + dy * dy)
+    
+    // If user moved more than 15px, it's a drag, not a click
+    if (distance > 15) {
+      return
+    }
+    
     if (itemIndex === currentIndex) {
       onCardTap(item)
     } else {
@@ -198,7 +213,7 @@ export default function ArcCarousel({ items, onCardTap }) {
             return (
               <div
                 key={item.id}
-                className="absolute rounded-2xl overflow-hidden cursor-pointer"
+                className="absolute rounded-2xl overflow-hidden cursor-pointer select-none"
                 style={{
                   width: `${CARD_W}px`,
                   height: `${CARD_H}px`,
@@ -206,14 +221,16 @@ export default function ArcCarousel({ items, onCardTap }) {
                     ? '0 30px 80px rgba(0,0,0,0.6), 0 0 40px rgba(117,194,255,0.15)'
                     : '0 16px 40px rgba(0,0,0,0.4)',
                   border: isActive
-                    ? '1px solid rgba(117,194,255,0.4)'
+                    ? '2px solid rgba(117,194,255,0.5)'
                     : '1px solid rgba(255,255,255,0.1)',
                   ...cardStyle,
                   willChange: 'transform, opacity',
                 }}
-                onPointerUp={(e) => {
-                  e.stopPropagation()
-                  handleCardTap(item, idx)
+                onPointerDown={(e) => {
+                  handleCardPointerDown(e)
+                }}
+                onClick={(e) => {
+                  handleCardClick(e, item, idx)
                 }}
               >
                 {/* Background image */}
