@@ -101,63 +101,63 @@ export default function ProductModal({ product, onClose }) {
 
         {/* Right: Content Section */}
         <div
-          className="w-full md:w-1/2 overflow-y-auto flex flex-col gap-8 p-8 md:p-12 lg:p-16"
+          className="w-full md:w-1/2 overflow-y-auto flex flex-col gap-5 md:gap-6 p-6 md:p-10 lg:p-12"
           style={{ scrollBehavior: 'smooth' }}
         >
           {/* Category + Title */}
-          <div className="space-y-4">
+          <div className="space-y-3">
             <p className="text-glass-300 text-xs md:text-sm font-semibold tracking-widest uppercase">
               {product.subtitle}
             </p>
-            <h2 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
               {product.title}
             </h2>
           </div>
 
           {/* Main Description */}
-          <p className="text-white/80 text-lg md:text-xl lg:text-2xl leading-relaxed font-light">
+          <p className="text-white/80 text-base md:text-lg lg:text-xl leading-relaxed font-light">
             {product.description}
           </p>
 
           {/* Applications Section */}
-          <div className="space-y-4">
+          <div className="space-y-3">
             <h3 className="text-glass-300 text-xs md:text-sm font-bold tracking-widest uppercase">
               Aplicações
             </h3>
-            <div className="flex flex-col gap-3 md:gap-4">
+            <div className="flex flex-col gap-2 md:gap-3">
               {product.applications.map((app, i) => (
-                <div key={i} className="flex items-center gap-4 p-4 rounded-xl" style={{ background: 'rgba(117,194,255,0.08)', border: '1px solid rgba(117,194,255,0.15)' }}>
-                  <div className="w-2 h-2 rounded-full bg-glass-300 flex-shrink-0" />
-                  <span className="text-white/85 text-base md:text-lg font-medium">{app}</span>
+                <div key={i} className="flex items-center gap-3 p-3 rounded-lg" style={{ background: 'rgba(117,194,255,0.08)', border: '1px solid rgba(117,194,255,0.15)' }}>
+                  <div className="w-1.5 h-1.5 rounded-full bg-glass-300 flex-shrink-0" />
+                  <span className="text-white/85 text-sm md:text-base font-medium">{app}</span>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Benefits/Diferenciais Section */}
-          <div className="space-y-4">
+          <div className="space-y-3">
             <h3 className="text-glass-300 text-xs md:text-sm font-bold tracking-widest uppercase">
               Diferenciais
             </h3>
-            <div className="grid grid-cols-1 gap-3 md:gap-4">
+            <div className="grid grid-cols-1 gap-2 md:gap-3">
               {product.benefits.map((b, i) => (
                 <div
                   key={i}
-                  className="flex items-start gap-4 rounded-xl p-4 md:p-5 transition-colors duration-200 hover:bg-glass-300/10"
+                  className="flex items-start gap-3 rounded-lg p-3 md:p-4 transition-colors duration-200 hover:bg-glass-300/10"
                   style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}
                 >
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="flex-shrink-0 mt-0.5">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="flex-shrink-0 mt-0.5">
                     <circle cx="12" cy="12" r="10" stroke="#75c2ff" strokeWidth="2" opacity="0.3" />
                     <path d="M8 12L11 15L16 9" stroke="#75c2ff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                  <span className="text-white/85 text-base md:text-lg leading-relaxed">{b}</span>
+                  <span className="text-white/85 text-sm md:text-base leading-relaxed">{b}</span>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Bottom spacing for touch scrolling */}
-          <div className="h-6" />
+          <div className="h-4" />
         </div>
       </div>
 
