@@ -54,7 +54,7 @@ export default function HeroSection() {
       </header>
 
       {/* Hero headline */}
-      <div className="relative z-10 text-center px-4 md:px-8 pt-6 md:pt-8 pb-2 md:pb-4">
+      <div className="relative z-10 text-center px-4 md:px-8 pt-6 md:pt-10 pb-6 md:pb-8">
         <p className="text-glass-100 text-xs md:text-sm font-Montserrat tracking-[0.35em] uppercase mb-2 md:mb-3">
           Qualidade que transforma espaços
         </p>
@@ -77,20 +77,20 @@ export default function HeroSection() {
       </div>
 
       {/* Carousel altura ajustada para mobile */}
-      <div className="relative z-10 flex-1 flex items-center mt-2 min-h-[500px] md:min-h-[600px]">
+      <div className="relative z-10 flex-1 flex items-center min-h-[450px] md:min-h-[550px]">
         <div className="w-full">
           <ArcCarousel items={products} onCardTap={setActiveProduct} />
         </div>
       </div>
 
       {/* Scroll hint */}
-      <div className="relative z-10 flex flex-col items-center pb-8 gap-2">
-        <p className="text-white/35 text-xs font-medium tracking-widest uppercase">
+      <div className="relative z-10 flex flex-col items-center py-4 md:py-6 gap-1 md:gap-2">
+        <p className="text-white/30 text-xs font-medium tracking-widest uppercase">
           Deslize para explorar
         </p>
-        <div className="flex flex-col items-center gap-1 animate-bounce">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M4 7L10 13L16 7" stroke="rgba(255,255,255,0.4)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <div className="flex flex-col items-center gap-0.5 animate-bounce">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+            <path d="M4 7L10 13L16 7" stroke="rgba(255,255,255,0.3)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </div>
       </div>
